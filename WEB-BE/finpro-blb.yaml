@@ -20,7 +20,7 @@ spec:
       volumes:
         - name: finproblb
           persistentVolumeClaim:
-            claimName: finpro-blb
+            claimName: finpro-blb-pvc
       containers:
         - name: finpro-blb
           image: reg.citytech.global/finpulse/blb:UAT.19
