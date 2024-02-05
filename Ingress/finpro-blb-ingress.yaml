@@ -18,9 +18,9 @@ spec:
     http:
       paths:
       - frontend:
+        path: /blb(/|$)(.*)
+        pathType: Prefix
           service:
-          path: /blb(/|$)(.*)
-          pathType: Prefix
             name: finpro-blb-portal-service
             port:
               number: 80
