@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: finpro-blb-portal-service
+    name: finpro-blb-service
 spec:
     selector:
-        app: finpro-blb-portal
+        app: finpro-blb
     ports:
         - name: http
           protocol: TCP

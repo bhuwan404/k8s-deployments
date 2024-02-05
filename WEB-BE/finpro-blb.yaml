@@ -4,7 +4,7 @@ metadata:
   name: finpro-blb
   namespace: blb-test
   labels:
-    app: finpro-blb-portal
+    app: finpro-blb
   
 spec:
   replicas: 1
