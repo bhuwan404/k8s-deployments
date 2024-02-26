@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: findesk-ui
+    namespace: findesk-stagging
+    labels:
+        app: findesk-ui
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: findesk-ui
+    template:
+        metadata:
+            labels:
+                app: findesk-ui
+        spec:
+            containers:
+                - name: findesk-ui-pod
+                  image: reg.citytech.global/finpro/findesk-ui:${BUILD_NUMBER}
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 80
+                      - containerPort: 443
+                  resources:
+                      limits:
+                          cpu: 200m
+                          memory: 256Mi
+                      requests:
+                          cpu: 100m
+                          memory: 256Mi
+                  livenessProbe:
+                      tcpSocket:
+                          port: 80
+                      initialDelaySeconds: 3
+                      periodSeconds: 10
+                      timeoutSeconds: 5
+                      failureThreshold: 3
+                  readinessProbe:
+                      tcpSocket:
+                          port: 80
+                      initialDelaySeconds: 5
+                      periodSeconds: 5
+                      timeoutSeconds: 5
