@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.org/client-max-body-size: 50M
+  
+  labels:
+    k8slens-edit-resource-version: v1
+  name: findesk-ingress
+  namespace: findesk-staging
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: findesk-stagging.droseblb.com.np
+    http:
+      paths:
+      - frontend:
+        path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: finpro-blb-service
+            port:
+              number: 80
+
