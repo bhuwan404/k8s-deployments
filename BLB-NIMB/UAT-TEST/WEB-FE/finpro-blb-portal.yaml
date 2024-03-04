@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: finpro-blb-portal
-    namespace: blb-test
     labels:
         app: finpro-blb-portal
 spec:
@@ -17,7 +16,7 @@ spec:
         spec:
             containers:
                 - name: finpro-blb-portal-pod
-                  image: reg.citytech.global/finpulse/blb-portal-uat:UAT.4
+                  image: reg.citytech.global/finpulse/blb-portal-uat-nimb:UAT.2
                   imagePullPolicy: Always
                   ports:
                       - containerPort: 80

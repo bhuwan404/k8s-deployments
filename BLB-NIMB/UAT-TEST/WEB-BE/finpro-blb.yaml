@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: finpro-blb
-  namespace: blb-test
   labels:
     app: finpro-blb
   
@@ -23,7 +22,7 @@ spec:
             claimName: finpro-blb-pvc
       containers:
         - name: finpro-blb
-          image: reg.citytech.global/finpulse/blb:UAT.19
+          image: reg.citytech.global/finpulse/blb-nimb:UAT.1
           ports:
             - containerPort: 8080
               protocol: TCP
