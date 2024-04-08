@@ -10,6 +10,7 @@ metadata:
   labels:
     k8slens-edit-resource-version: v1
   name: blb-ingress
+  namespace: blb-uat
 spec:
   ingressClassName: nginx
   rules:
@@ -30,4 +31,4 @@ spec:
           service:
             name: finpro-blb-service
             port:
-              number: 80
+              number: 8080

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: finpro-blb
+  namespace: blb-uat
   labels:
     app: finpro-blb
   

@@ -11,8 +11,13 @@ metadata:
     k8slens-edit-resource-version: v1
   name: blb-ingress
   namespace: blb-test
+
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - droseblb.com.np
+    secretName: drose-cert
   rules:
   - host: blbtest.droseblb.com.np
     http:

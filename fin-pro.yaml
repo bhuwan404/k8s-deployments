@@ -1,0 +1,189 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fin-pro
+  namespace: finpulse-dev
+  labels:
+    app: fin-pro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fin-pro
+  template:
+    metadata:
+      labels:
+        app: fin-pro
+    spec:
+      volumes:
+        - name: bankimpl-cert
+          configMap:
+            name: giblcert
+      containers:
+        - name: fin-pro-pod
+          image: reg.citytech.global/finpro/finpro:DEV.1006
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: JNDI_NAME
+              value: java:jboss/datasource/finProDS
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: DB_PORT
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: JWT_KEY
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: DB_NAME
+            - name: DB_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: DB_USER_NAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: DB_PASSWORD
+            - name: BANKIMPL_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: BANKIMPL_CERT
+            - name: ELASTIC_SEARCH_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: ELASTIC_SEARCH_CERT
+            - name: ELASTIC_SEARCH_ID
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: ELASTIC_SEARCH_ID
+            - name: ELASTIC_SEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: ELASTIC_SEARCH_PASSWORD
+            - name: ELASTIC_SEARCH_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: ELASTIC_SEARCH_HOST
+            - name: ELASTIC_SEARCH_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: ELASTIC_SEARCH_PORT
+            - name: VIDEO_KYC_URL
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: VIDEO_KYC_URL
+            - name: BANKIMPL_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: BANKIMPL_CONFIG
+            - name: KYC_PURPOSE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: KYC_PURPOSE_ID
+            - name: TEMP_FILE_LOCATION
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: TEMP_FILE_LOCATION
+            - name: BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: BASE_URL
+            - name: SELF_VIDEO_KYC_URL
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: SELF_VIDEO_KYC_URL
+            - name: WEBSITE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: WEBSITE_URL
+            - name: BLB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: finpulse-secret
+                  key: BLB_URL
+            - name: JVM_OPTS
+              value: '-XX:+UseContainerSupport -XX:MaxRAMPercentage=80'
+          resources:
+            limits:
+              memory: 1500G
+            requests:
+              memory: 500Mi
+          volumeMounts:
+            - name: bankimpl-cert
+              mountPath: /opt/jboss/cert/giblcert.crt
+              subPath: giblcert.crt
+            - name: elastic-cert
+              mountPath: /opt/jboss/cert/elasticcert.crt
+              subPath: elasticcert.crt
+          livenessProbe:
+            httpGet:
+              path: /public-endpoints/api/ping
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            timeoutSeconds: 60
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /public-endpoints/api/ping
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            timeoutSeconds: 60
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      hostAliases:
+        - ip: 192.168.214.30
+          hostnames:
+            - coaext.gibl.com.np
+        - ip: 192.168.213.45
+          hostnames:
+            - giblliveapi.iis
+        - ip: 10.9.18.135
+          hostnames:
+            - uatvkyc.gibl.com.np
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
