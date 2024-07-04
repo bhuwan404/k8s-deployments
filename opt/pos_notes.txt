@@ -1,0 +1,29 @@
+<subsystem xmlns="urn:jboss:domain:messaging-activemq:13.0">
+....
+  <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="artemis" transaction="xa" user="guest" password="guest"/>
+            <external-jms-queue name="blbQueue" entries="queue/blbQueue"/>
+            <external-jms-queue name="blbQueue_reversal" entries="queue/blbQueue_reversal"/>
+            <external-jms-queue name="blbDisbursementQueue" entries="queue/blbDisbursementQueue"/>
+            <external-jms-queue name="blbPreEnrolmentCustomersQueue" entries="queue/blbPreEnrolmentCustomersQueue"/>
+            <external-jms-queue name="blb_preEnrolCustomerWithMiscDetailQueue" entries="queue/blb_preEnrolCustomerWithMiscDetailQueue"/>
+            <external-jms-queue name="blb_postEnrolCustomerWithMiscDetailQueue" entries="queue/blb_postEnrolCustomerWithMiscDetailQueue"/>
+            <external-jms-queue name="blb_offlinePaymentQueue" entries="queue/blb_offlinePaymentQueue"/>
+            <external-jms-queue name="blbCardInventoryQueue" entries="queue/blbCardInventoryQueue"/>
+...
+</subsystem>
+
+wget https://jdbc.postgresql.org/download/postgresql-42.7.1.jar
+
+data-source add --name=BLBDS --jndi-name=java:jboss/datasources/BLBDS --driver-name=postgresql-42.7.1.jar --connection-url=jdbc:postgresql://192.168.213.86:5432/swift_blb --user-name=swift_blb --password=blb@123
+
+https://drive.google.com/file/d/1FrF9htmlDCY8hCFnSuejcRQojkZqyNvd/view?usp=sharing
+
+
+sudo yum instal glibc.i686
+unzip converter_template.zip 
+cd converter_template
+chmod +x template_converter
+chown root:root template_converter
+cp template_converter /usr/bin/template_converter
+mkdir -p /opt/blb/temp
+mkdir -p /opt/converter/temp

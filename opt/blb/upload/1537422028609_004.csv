@@ -1,0 +1,7 @@
+Card No,Account no,Branch Code,Full Name,DOB(AD){mm/dd/yy},Citizenship No,Address,Scheme For Bank,Scheme For Merchant,Scheme for Biller,Scheme for Remittance,Scheme for Wallet,Assistance Type,Member ID,Reg No,Gender,Caste_Group,Caste,Marital_Status,District,VDC/Municipality,Ward_No,ID_Type,ID_Number,Father Name,Spouse Name
+6666670000000000,5555554404,4,AADESH BK,5/9/1980,123,KTM,"SC-C-ALL
+",NONE,NONE,NONE,NONE,,,,Male,,,S,Kathmandu,3,6,CTZ,564,,
+6666670000000000,5555554405,4,AAETI DEVI SING,4/22/1995,456,BKT,"SC-C-ALL
+",NONE,NONE,NONE,NONE,,,,Female,,,M,Bhaktapur,4,7,CTZ,323,,
+6666670000000000,5555554406,4,AARATI BK,9/11/1970,789,LPR,"SC-C-ALL
+",NONE,NONE,NONE,NONE,,,,Female,,,W,Lalitpur,5,8,CTZ,788,,
