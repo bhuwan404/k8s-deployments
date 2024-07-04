@@ -1,0 +1,11 @@
+SN,BRANCH CODE,NRB BRANCH CODE,BRANCH NAME,AGENT CODE,NRB AGENT CODE,AGENT NAME,MALE COUNT,FEMALE COUNT,UNKNOWN GENDER COUNT,ACTIVE ACCOUNTS,CARD ISSUED,LAST TRAN DATE
+1,"002-B",,"Basundhara",,,,"0","0","0","0","0",
+2,"0000","","HeadOffice","AAAAAAA","AQQ","aa","0","0","0","0","0",
+3,"0000","","HeadOffice","MBL23","","Maulik Agent","2","0","0","1","2",
+4,"0000","","HeadOffice","MBL-NJ","MBL-NJ","Nimmi Juwa","10","6","0","15","0",
+5,"B003","1222222","HeadOffice",,,,"0","0","0","0","0",
+6,"Km001","12444","Kamladi branch",,,,"0","0","0","0","0",
+7,"001-L",,"lalitpur",,,,"0","0","0","0","0",
+8,"001","","newroad","MBLISH","09998","ISHA SHRESTHA","0","0","1","1","1","Fri, 01 Mar 2024 14:27:37 NPT"
+9,"001","","newroad","UATTEST","1090E","MBL TESTeee","0","0","0","0","0",
+10,"uat","","New UAT branch",,,,"0","0","0","0","0",
