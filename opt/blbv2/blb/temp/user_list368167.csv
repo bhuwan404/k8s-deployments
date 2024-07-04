@@ -1,0 +1,12 @@
+SN,User Name,User Role,Branch,Active
+1,"BLB ADMIN","itadmin@mbl.com.np","","true"
+2,"NIMMI JUWA","nimmi@mbl.com.np","001-L","true"
+3,"ISHA SHRESTHA","isha@mbl.com.np","002-B","false"
+4,"Isha Shrestha","isha@mblbank.com.np","002-B","true"
+5,"ISHA SHRESTHA","","","true"
+6,"MbL test user","mbltestuser@yopmail.com","002-B","true"
+7,"MbL test user2","mbltestuser2@yopmail.com","002-B","true"
+8,"krantesh shrestha","krantesh@mbl.com.np","002-B","true"
+9,"Nimmi Juwa","isha@agentmbl.com","","true"
+10,"ISHA SHRESTHA","","001-L","true"
+11,"Kshitij Maharjan","kshitij@mbl.com.np","0000","true"

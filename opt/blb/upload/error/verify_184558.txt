@@ -1,1 +1,0 @@
-<br/>null:null : Card is already used by other customer
