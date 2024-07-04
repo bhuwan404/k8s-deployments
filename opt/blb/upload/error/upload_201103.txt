@@ -1,0 +1,1 @@
+<br/>ROW 1: ::Invalid Agent Code = ???Agent Code::INVALID CARD LENGTH::INVALID BRANCH CODE::INVALID DATE FORMAT::Invalid Scheme Code = Scheme For Bank<br/>ROW 2: ::Invalid Agent Code = 1001::INVALID CARD LENGTH<br/>ROW 3: ::Invalid Agent Code = 1001
