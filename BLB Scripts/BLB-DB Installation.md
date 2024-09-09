@@ -1,13 +1,11 @@
-INSTALLATION SCRIPT FOR POSTGRES DB
-```
 #!/bin/bash
 
 #Variable Declaration
-VER="15"
+VER="16"
 
 DATA_DIR_UBUNTU="/var/lib/postgresql/$VER/main"
 DATA_DIR_RHEL="/var/lib/pgsql/$VER/data"
-DATA_DIR="/usr/lib/pgsql"
+DATA_DIR="/Database/pgsql/16/data"
 DB_PORT="5432"
 
 CONFIG_DIR_UBUNTU="/etc/postgresql/$VER/main"
@@ -138,20 +136,3 @@ else
 	systemctl enable postgresql.service
 	echo "--------------------------------"
 fi
-```
-
-#### Create database and user
-```
-CREATE USER blbadmin PASSWORD 'blb@123#$';
-CREATE DATABASE swift_blb OWNER blbadmin;
-```
-
-#### Export PostgreSQL database
-```
-pg_dump -h <db-ip> -U <username> -d <db name> -W -v -F t  > blb_bak.tar
-```
-
-#### Restore PostgreSQL database
-```
-pg_restore -h <db-ip> -U <username> -d <db name> -v -F t blb_bak.tar
-```
