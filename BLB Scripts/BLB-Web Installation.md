@@ -1,5 +1,3 @@
-INSTALLATION SCRIPT WITH K3S
-```
 #!/bin/bash
 
 # Variable Declaration
@@ -7,18 +5,18 @@ K3S_VER="v1.29.4+k3s1"
 HTTP_PORT=""
 HTTPS_PORT=""
 IP_ADDR=$(hostname -I | awk '{print $1}')
-BANK="nimb"
+BANK="nmb"
 PRODUCT="blb"
 ENV="live"
 NAMESPACE=$BANK-$PRODUCT-$ENV
 
 DOMAIN="nimb.com.np"
-FQDN="blb.$DOMAIN"
+FQDN="blbapp.$DOMAIN"
 CERT=$(echo "<insert wildcard certificate here>" | base64 -w 0)
 KEY=$(echo "<insert private key here>" | base64 -w 0)
 
 DB=$BANK-$PRODUCT-$ENV
-DB_IP="192.168.1.1"
+DB_IP="10.0.132.47"
 DB_PORT="5432"
 KAFKA_SVC="my-kafka"
 KAFKA_NS="kafka"
@@ -33,8 +31,8 @@ JWT_KEY=$(echo -n "RHQ0UkhqanFqVlhwTzlqZ0R0NFJIampxalZYcE85amcK" | base64)
 KAFKA_SERVER=$(echo -n "$KAFKA_SVC.$KAFKA_NS.svc.cluster.local:9092" | base64)
 
 
-BLB_BE_IMAGE="reg.citytech.global/finpulse/blb-nimb:UAT.8"
-BLB_FE_IMAGE="reg.citytech.global/finpulse/blb-portal-uat-nimb:UAT.17"
+BLB_BE_IMAGE="harbor.finpos.global/finpulse/blb-nmb:PROD.1"
+BLB_FE_IMAGE="harbor.finpos.global/finpulse/blb-portal-nmb:PROD.1"
 
 
 echo
@@ -562,4 +560,3 @@ spec:
 EOF
 kubectl apply -f finpro-blb-ingress.yaml
 echo "--------------------------------"
-```
