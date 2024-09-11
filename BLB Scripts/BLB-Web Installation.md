@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variable Declaration
-K3S_VER="v1.29.4+k3s1"
+K3S_VER="v1.30.4+k3s1"
 HTTP_PORT=""
 HTTPS_PORT=""
 IP_ADDR=$(hostname -I | awk '{print $1}')
