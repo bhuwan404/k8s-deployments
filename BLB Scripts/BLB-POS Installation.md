@@ -238,4 +238,46 @@ rlPHDMJ9NdqmUipqoSIQKv6Cv+5RnpZHPvs6ZrZcKURYgoTcZdVBtAj8asu1Ia3t
 jOtVhUaYbuJMfP+suxnTJA==
 -----END PRIVATE KEY-----
 
+==
+
+<pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="artemis" transaction="xa" user="guest" password="guest"/>
+            <external-jms-queue name="blbQueue" entries="queue/blbQueue"/>
+            <external-jms-queue name="blbQueue_reversal" entries="queue/blbQueue_reversal"/>
+            <external-jms-queue name="blbDisbursementQueue" entries="queue/blbDisbursementQueue"/>
+            <external-jms-queue name="blbPreEnrolmentCustomersQueue" entries="queue/blbPreEnrolmentCustomersQueue"/>
+            <external-jms-queue name="blb_preEnrolCustomerWithMiscDetailQueue" entries="queue/blb_preEnrolCustomerWithMiscDetailQueue"/>
+            <external-jms-queue name="blb_postEnrolCustomerWithMiscDetailQueue" entries="queue/blb_postEnrolCustomerWithMiscDetailQueue"/>
+            <external-jms-queue name="blb_offlinePaymentQueue" entries="queue/blb_offlinePaymentQueue"/>
+            <external-jms-queue name="blbCardInventoryQueue" entries="queue/blbCardInventoryQueue"/>
+
+===
+
+wget https://jdbc.postgresql.org/download/postgresql-42.7.1.jar
+
+=
+sudo cp /opt/wildfly/standalone/configuration/standalone-full.xml /opt/wildfly/standalone/configuration/standalone-full.xml.backupb4ssl
+openssl pkcs12 -export -in bundle.crt -inkey private.key -out serverjboss.p12 -name jboss
+keytool -importkeystore -destkeystore serverjboss.jks -srckeystore serverjboss.p12 -srcstoretype PKCS12 -alias jboss
+cp serverjboss.jks /opt/wildfly/standalone/configuration/keystore.jks
+
+===
+
+cd /opt/wildfly/standalone/configuration/
+sudo /opt/wildfly/bin/jboss-cli.sh
+/subsystem=elytron/key-store=httpsKS:add(path=keystore.jks,relative-to=jboss.server.config.dir,credential-reference={clear-text=<passoword-used-while-creating-jks>},type=JKS)
+/subsystem=elytron/key-manager=httpsKM:add(key-store=httpsKS,credential-reference={clear-text=<passoword-used-while-creating-jks>})
+/subsystem=elytron/server-ssl-context=httpsSSC:add(key-manager=httpsKM,protocols=["TLSv1.2","TLSv1.3"])
+/subsystem=undertow/server=default-server/https-listener=https:read-attribute(name=security-realm)
+batch
+/subsystem=undertow/server=default-server/https-listener=https:undefine-attribute(name=security-realm)
+/subsystem=undertow/server=default-server/https-listener=https:write-attribute(name=ssl-context,value=httpsSSC)
+run-batch
+reload
+
+===
+
+
+
+
+
 
